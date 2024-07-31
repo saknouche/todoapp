@@ -25,7 +25,7 @@ deploy:
     - chmod 400 $SSH_KEY
   script:
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY vagrant@172.16.96.134 "
-      docker login -u $REGISTRY_USER -p $REGISTRY_PASS &&
+      docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD &&
       docker ps -aq | xargs docker stop | xargs docker rm &&
       docker run -d -p 3000:3000 $IMAGE_NAME:$IMAGE_TAG"
 
