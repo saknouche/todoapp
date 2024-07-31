@@ -23,3 +23,4 @@ cypress
 *.njsproj
 *.sln
 *.sw?
+react-app-key.pem
