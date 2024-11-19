@@ -4,7 +4,6 @@ pipeline {
     environment {
         IMAGE = "saknouche/todoapp:version-${env.BUILD_ID}"
         SCANNER_HOME = tool 'sonar-scanner'
-        JENKINS_API_TOKEN = credentials('JENKINS_API_TOKEN')
     }
     
     tools {
@@ -109,13 +108,6 @@ pipeline {
                                 sh 'kubectl apply -f service.yml'
                         }
                     }
-                }
-            }
-        }
-        stage("Trigger CD"){
-            steps{
-                script {
-                     sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://172.16.96.212:8080/job/gitops-complete-pipeline/buildWithParameters?token=gitops-token'"
                 }
             }
         }
